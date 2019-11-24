@@ -16,7 +16,7 @@
 #define LEDCANCEL		HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET)
 #define LEDCANCELM 		HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET)
 
-enum state {start, koin500, koin1000, proses, cancel, out, finish} Kondisi;
+enum state {start, koin500, koin1000, kembali, proses, cancel, out, finish} Kondisi;
 volatile uint16_t timeout;
 
 unsigned char PB500(void);
@@ -78,13 +78,21 @@ void Task_Run(void)
 			LED500M;
 			LEDPROSESM;
 			LEDCANCELM;
-			Kondisi=proses;
+			Kondisi=kembali;
 		}
 		if(PBCANCEL())
 		{
 			Kondisi=cancel;
 		}
 		break;
+	}
+	case kembali:
+	{
+		HAL_Delay(1000);
+		LED1000M;
+		HAL_Delay(2000);
+		LED500;
+		Kondisi=proses;
 	}
 	case proses:
 	{
