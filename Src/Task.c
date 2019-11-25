@@ -162,7 +162,7 @@ void Task_Run(void)
 	{
 		LED500M;
 		LED1000;
-		LEDPROSES;
+		LEDPROSESM;
 		LEDCANCEL;
 		HAL_Delay(2000);
 		Kondisi=finish;
@@ -172,7 +172,7 @@ void Task_Run(void)
 	{
 		LED500;
 		LED1000M;
-		LEDPROSES;
+		LEDPROSESM;
 		LEDCANCEL;
 		HAL_Delay(2000);
 		Kondisi=finish;
