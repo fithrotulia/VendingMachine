@@ -16,7 +16,7 @@
 #define LEDCANCEL		HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET)
 #define LEDCANCELM 		HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET)
 
-enum state {start, koin500, koin1000, kembali500, kembali1000, proses, cancel, out, finish} Kondisi;
+enum state {start, koin500, koin1000, kembali500, kembali1000, proses, cancel500, cancel, out, finish} Kondisi;
 volatile uint16_t timeout;
 
 unsigned char PB500(void);
@@ -80,35 +80,58 @@ void Task_Run(void)
 			LEDCANCELM;
 			Kondisi=kembali500;
 		}
+		if(PBPROSES())
+		{
+			LED500;
+			LED1000;
+			LEDPROSES;
+			LEDCANCEL;
+			HAL_Delay(500);
+			LED500M;
+			LED1000M;
+			LEDPROSESM;
+			LEDCANCELM;
+			HAL_Delay(500);
+			LED500;
+			LED1000;
+			LEDPROSES;
+			LEDCANCEL;
+			HAL_Delay(500);
+			LED500M;
+			LED1000M;
+			LEDPROSESM;
+			LEDCANCELM;
+			HAL_Delay(1);
+			LED500;
+			Kondisi=koin1000;
+		}
 		if(PBCANCEL())
 		{
-			Kondisi=cancel;
+			Kondisi=cancel500;
 		}
 		break;
 	}
 	case kembali500:
 	{
-		HAL_Delay(2000);
-		LED1000M;
-		HAL_Delay(2000);
+		HAL_Delay(500);
 		LED500;
-		HAL_Delay(2000);
+		HAL_Delay(500);
 		LED500M;
-		HAL_Delay(2000);
-		LED1000;
 		Kondisi=proses;
+		break;
 	}
 	case kembali1000:
 	{
-		HAL_Delay(2000);
+		HAL_Delay(500);
 		LED1000M;
-		HAL_Delay(2000);
+		HAL_Delay(500);
 		LED1000;
-		HAL_Delay(2000);
+		HAL_Delay(500);
 		LED1000M;
-		HAL_Delay(2000);
+		HAL_Delay(500);
 		LED1000;
 		Kondisi=proses;
+		break;
 	}
 	case proses:
 	{
@@ -138,11 +161,19 @@ void Task_Run(void)
 	case cancel:
 	{
 		LED500M;
-		LED1000M;
-		LEDPROSESM;
-		LEDCANCEL;
-		HAL_Delay(3000);
 		LED1000;
+		LEDPROSES;
+		LEDCANCEL;
+		HAL_Delay(2000);
+		Kondisi=finish;
+		break;
+	}
+	case cancel500:
+	{
+		LED500;
+		LED1000M;
+		LEDPROSES;
+		LEDCANCEL;
 		HAL_Delay(2000);
 		Kondisi=finish;
 		break;
@@ -155,6 +186,7 @@ void Task_Run(void)
 		LEDCANCEL;
 		HAL_Delay(3000);
 		Kondisi=finish;
+		break;
 	}
 	case finish:
 	{
