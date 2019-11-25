@@ -149,7 +149,6 @@ void Task_Run(void)
 			LED500M;
 			LED1000M;
 			LEDCANCELM;
-			HAL_Delay(1000);
 			Kondisi=out;
 		}
 		if(PBCANCEL())
@@ -180,7 +179,6 @@ void Task_Run(void)
 	}
 	case out:
 	{
-		LEDPROSES;
 		HAL_Delay(3000);
 		LEDPROSESM;
 		HAL_Delay(3000);
