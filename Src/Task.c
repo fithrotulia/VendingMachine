@@ -180,11 +180,11 @@ void Task_Run(void)
 	}
 	case out:
 	{
-		LED500;
-		LED1000;
 		LEDPROSES;
-		LEDCANCEL;
 		HAL_Delay(3000);
+		LEDPROSESM;
+		HAL_Delay(3000);
+		LEDPROSES;
 		Kondisi=finish;
 		break;
 	}
