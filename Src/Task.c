@@ -163,7 +163,7 @@ void Task_Run(void)
 		LED1000;
 		LEDPROSESM;
 		LEDCANCEL;
-		HAL_Delay(2000);
+		HAL_Delay(1000);
 		Kondisi=finish;
 		break;
 	}
@@ -173,16 +173,17 @@ void Task_Run(void)
 		LED1000M;
 		LEDPROSESM;
 		LEDCANCEL;
-		HAL_Delay(2000);
+		HAL_Delay(1000);
 		Kondisi=finish;
 		break;
 	}
 	case out:
 	{
-		HAL_Delay(3000);
+		HAL_Delay(1000);
 		LEDPROSESM;
-		HAL_Delay(3000);
+		HAL_Delay(1000);
 		LEDPROSES;
+		HAL_Delay(1000);
 		Kondisi=finish;
 		break;
 	}
