@@ -82,28 +82,7 @@ void Task_Run(void)
 		}
 		if(PBPROSES())
 		{
-			LED500;
-			LED1000;
-			LEDPROSES;
-			LEDCANCEL;
-			HAL_Delay(500);
-			LED500M;
-			LED1000M;
-			LEDPROSESM;
-			LEDCANCELM;
-			HAL_Delay(500);
-			LED500;
-			LED1000;
-			LEDPROSES;
-			LEDCANCEL;
-			HAL_Delay(500);
-			LED500M;
-			LED1000M;
-			LEDPROSESM;
-			LEDCANCELM;
-			HAL_Delay(1);
-			LED500;
-			Kondisi=koin1000;
+			Kondisi=cancel500;
 		}
 		if(PBCANCEL())
 		{
