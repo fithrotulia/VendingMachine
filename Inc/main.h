@@ -66,6 +66,8 @@ void Error_Handler(void);
 #define LED2_GPIO_Port GPIOB
 #define LED3_Pin GPIO_PIN_11
 #define LED3_GPIO_Port GPIOB
+#define BUZZER_Pin GPIO_PIN_5
+#define BUZZER_GPIO_Port GPIOB
 #define PB500_Pin GPIO_PIN_6
 #define PB500_GPIO_Port GPIOB
 #define PB1000_Pin GPIO_PIN_7

@@ -15,6 +15,8 @@
 #define LEDPROSESM 		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET)
 #define LEDCANCEL		HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_SET)
 #define LEDCANCELM 		HAL_GPIO_WritePin(LED0_GPIO_Port, LED0_Pin, GPIO_PIN_RESET)
+#define BUZZER			HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, GPIO_PIN_SET)
+#define BUZZERM			HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, GPIO_PIN_RESET)
 
 enum state {start, koin500, koin1000, kembali500, kembali1000, proses, cancel500, cancel, out, finish} Kondisi;
 volatile uint16_t timeout;
@@ -39,6 +41,7 @@ void Task_Run(void)
 		LED1000M;
 		LEDPROSESM;
 		LEDCANCELM;
+		BUZZERM;
 		Kondisi=koin500;
 		break;
 	}
@@ -82,28 +85,7 @@ void Task_Run(void)
 		}
 		if(PBPROSES())
 		{
-			LED500;
-			LED1000;
-			LEDPROSES;
-			LEDCANCEL;
-			HAL_Delay(500);
-			LED500M;
-			LED1000M;
-			LEDPROSESM;
-			LEDCANCELM;
-			HAL_Delay(500);
-			LED500;
-			LED1000;
-			LEDPROSES;
-			LEDCANCEL;
-			HAL_Delay(500);
-			LED500M;
-			LED1000M;
-			LEDPROSESM;
-			LEDCANCELM;
-			HAL_Delay(1);
-			LED500;
-			Kondisi=koin1000;
+			Kondisi=cancel500;
 		}
 		if(PBCANCEL())
 		{
@@ -163,7 +145,13 @@ void Task_Run(void)
 		LED1000;
 		LEDPROSESM;
 		LEDCANCEL;
-		HAL_Delay(1000);
+		HAL_Delay(1);
+		BUZZER;
+		HAL_Delay(1);
+		BUZZERM;
+		HAL_Delay(1);
+		BUZZER;
+		HAL_Delay(1);
 		Kondisi=finish;
 		break;
 	}
@@ -173,7 +161,13 @@ void Task_Run(void)
 		LED1000M;
 		LEDPROSESM;
 		LEDCANCEL;
-		HAL_Delay(1000);
+		HAL_Delay(1);
+		BUZZER;
+		HAL_Delay(1);
+		BUZZERM;
+		HAL_Delay(1);
+		BUZZER;
+		HAL_Delay(1);
 		Kondisi=finish;
 		break;
 	}
@@ -183,6 +177,7 @@ void Task_Run(void)
 		LEDPROSESM;
 		HAL_Delay(1000);
 		LEDPROSES;
+		BUZZER;
 		HAL_Delay(1000);
 		Kondisi=finish;
 		break;
